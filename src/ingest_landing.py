@@ -1,15 +1,24 @@
 import os
 import urllib.request
 from datetime import datetime, timezone
-from typing import Dict, List
-
-
-BASE_URL = "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page"
+from typing import Dict, List, Optional
+S
+BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data"
 
 DEFAULT_YEAR = 2023
 DEFAULT_MONTHS = [1, 2, 3, 4, 5]
 
-LANDING_BASE_PATH = "dbfs:/FileStore/ifood_case/landing/nyc_tlc/yellow_taxi"
+
+CATALOG_NAME = "workspace"
+SCHEMA_NAME = "ifood_case"
+VOLUME_NAME = "case_files"
+
+VOLUME_BASE_PATH = f"dbfs:/Volumes/{CATALOG_NAME}/{SCHEMA_NAME}/{VOLUME_NAME}"
+
+LANDING_BASE_PATH = (
+    f"{VOLUME_BASE_PATH}/landing/nyc_tlc/yellow_taxi"
+)
+
 LOCAL_TMP_DIR = "/tmp/ifood_case_landing"
 
 
