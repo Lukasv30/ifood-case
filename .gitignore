@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env
+
+landing/*
+!landing/.gitkeep
+
+metadata/*
+!metadata/.gitkeep
+
+*.parquet
+*.delta
