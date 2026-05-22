@@ -16,17 +16,16 @@ GOLD_MAY_HOURLY_PASSENGERS_TABLE_NAME = (
 
 def read_silver_table(spark: SparkSession) -> DataFrame:
     """
-    Read the Silver table used as source for the Gold layer.
+    Lê a tabela de prata para criar a camada de ouro.
     """
     return spark.table(SILVER_TABLE_NAME)
 
 
 def build_gold_trips_dataframe(silver_df: DataFrame) -> DataFrame:
     """
-    Build a business-friendly trip-level Gold table.
+    Cria uma tabela Gold com um valor de negócio voltado para o nível de viagem otimizada para negócios.
 
-    This table keeps the required fields from the case and useful
-    analytical date/time attributes created in the Silver layer.
+    Esta tabela mantém os campos obrigatórios do caso e atributos analíticos úteis de data/hora criados na camada Silver.
     """
     return (
         silver_df
@@ -48,10 +47,9 @@ def build_gold_trips_dataframe(silver_df: DataFrame) -> DataFrame:
 
 def build_monthly_avg_total_amount_dataframe(silver_df: DataFrame) -> DataFrame:
     """
-    Answer business question 1:
+    Resposta para pergunta de negócios 1:
 
-    What is the average total_amount received in a month considering
-    all Yellow Taxi trips?
+    Qual é o valor total médio recebido em um mês, considerando todas as viagens de táxi amarelo?
     """
     return (
         silver_df
@@ -69,10 +67,9 @@ def build_monthly_avg_total_amount_dataframe(silver_df: DataFrame) -> DataFrame:
 
 def build_may_hourly_avg_passenger_count_dataframe(silver_df: DataFrame) -> DataFrame:
     """
-    Answer business question 2:
+    Resposta para pergunta de negócios 2:
 
-    What is the average passenger_count by hour of day in May
-    considering all Yellow Taxi trips?
+    Qual é a média de passageiros por hora do dia em maio, considerando todas as viagens de táxi amarelo?
     """
     return (
         silver_df
@@ -94,9 +91,7 @@ def write_delta_table(
     table_name: str,
     mode: str = "overwrite",
 ) -> None:
-    """
-    Persist a DataFrame as a Delta table in Unity Catalog.
-    """
+    
     (
         df
         .write
@@ -112,7 +107,7 @@ def create_gold(
     mode: str = "overwrite",
 ) -> dict:
     """
-    Build and persist all Gold layer tables.
+    Cria as tabelas da camada Gold.
     """
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG_NAME}.{SCHEMA_NAME}")
 
