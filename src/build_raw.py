@@ -28,10 +28,7 @@ REQUIRED_COLUMNS = [
 
 def build_landing_file_path(year: int, month: str) -> str:
     """
-    Build the monthly landing file path.
-
-    The landing layer stores the original NYC TLC Parquet files organized
-    by year and month.
+    Crie o caminho do arquivo de destino mensal.
     """
     return (
         f"{LANDING_BASE_PATH}/"
@@ -47,11 +44,10 @@ def read_landing_month(
     month: str,
 ) -> DataFrame:
     """
-    Read one monthly file from the landing zone and apply a controlled schema.
+    Lê cada arquivo extraído e aplica o esquema controlado (Unity Catalog).
 
-    The raw files may have physical schema differences across months.
-    For this reason, each monthly file is read independently and then
-    normalized before the union operation.
+    Como os arquivos brutos podem apresentar diferenças físicas de esquema entre os meses, cada arquivo mensal é lido independentemente e, em seguida,
+    normalizado antes da operação de união.
     """
     source_file = build_landing_file_path(year, month)
 
@@ -78,7 +74,7 @@ def build_raw_dataframe(
     months: List[str],
 ) -> DataFrame:
     """
-    Build the Raw DataFrame by reading all selected monthly landing files.
+    Constroe o Raw DataFrame com base na landing.
     """
     monthly_dfs = [
         read_landing_month(
@@ -100,9 +96,7 @@ def write_raw_table(
     raw_df: DataFrame,
     mode: str = "overwrite",
 ) -> None:
-    """
-    Persist the Raw DataFrame as a Delta table in Unity Catalog.
-    """
+    
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG_NAME}.{SCHEMA_NAME}")
 
     (
@@ -123,7 +117,7 @@ def create_raw(
     mode: str = "overwrite",
 ) -> DataFrame:
     """
-    Build and persist the Raw table.
+    Cria a tabela Raw/Bronze
     """
     raw_df = build_raw_dataframe(
         spark=spark,
