@@ -289,10 +289,6 @@ Para executar o projeto, é necessário:
 
 **O arquivo requirements.txt é voltado principalmente para desenvolvimento local. No Databricks, PySpark e Spark já fazem parte do runtime.**
 
-Conteúdo sugerido:
-
-pyspark>=3.5.0
-pytest>=8.0.0
 ---
 ## 8. Como Executar
 ### 8.1 Clonar o repositório no Databricks
