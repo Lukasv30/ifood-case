@@ -1,6 +1,4 @@
-# ifood-case
-
-# iFood Data Architecture Case
+# iFood Data Engineering Case
 
 ## 1. Objetivo
 
