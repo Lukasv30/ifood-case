@@ -166,6 +166,7 @@ Tabelas criadas:
 | workspace.ifood_case.gold_yellow_taxi_trips |	Tabela analítica de corridas tratadas |
 | workspace.ifood_case.gold_avg_total_amount_by_month |	Média mensal de total_amount |
 | workspace.ifood_case.gold_avg_passenger_count_may_by_hour |	Média de passenger_count por hora no mês de maio |
+---
 
 A escolha de SQL como linguagem principal de consumo foi feita porque SQL é amplamente utilizado por analistas, engenheiros de dados e áreas de negócio, além de ser suportado diretamente pelo Databricks SQL Editor.
 ---
