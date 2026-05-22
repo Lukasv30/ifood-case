@@ -11,17 +11,16 @@ SILVER_TABLE_NAME = f"{CATALOG_NAME}.{SCHEMA_NAME}.silver_yellow_taxi_trips"
 
 def read_raw_table(spark: SparkSession) -> DataFrame:
     """
-    Read the Raw table created from the landing files.
+    Lê a tabela Raw criada.
     """
     return spark.table(RAW_TABLE_NAME)
 
 
 def build_silver_dataframe(raw_df: DataFrame) -> DataFrame:
     """
-    Build the Silver DataFrame.
+    Construe o DataFrame Silver.
 
-    The Silver layer applies minimal data quality rules and creates
-    analytical helper columns for downstream SQL/PySpark consumption.
+    A camada Silver aplica regras mínimas de qualidade de dados e cria, aqui vamos deixar apenas a ultima versão do dado com colunas auxiliares analíticas para consumo posterior em SQL/PySpark.
     """
     return (
         raw_df
@@ -67,9 +66,7 @@ def write_silver_table(
     silver_df: DataFrame,
     mode: str = "overwrite",
 ) -> None:
-    """
-    Persist the Silver DataFrame as a Delta table in Unity Catalog.
-    """
+    
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG_NAME}.{SCHEMA_NAME}")
 
     (
@@ -88,7 +85,7 @@ def create_silver(
     mode: str = "overwrite",
 ) -> DataFrame:
     """
-    Build and persist the Silver table.
+    Constroe a Camada Silver.
     """
     raw_df = read_raw_table(spark)
 
