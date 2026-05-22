@@ -28,7 +28,7 @@ REQUIRED_COLUMNS = [
 
 def build_landing_file_path(year: int, month: str) -> str:
     """
-    Crie o caminho do arquivo de destino mensal.
+    Cria o caminho do arquivo de destino mensal.
     """
     return (
         f"{LANDING_BASE_PATH}/"
