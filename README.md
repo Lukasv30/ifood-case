@@ -1,8 +1,8 @@
-# iFood Data Architecture Case
+# iFood Data Engineering Case
 
 ## 1. Visão Geral
 
-Este repositório contém a solução desenvolvida para o case técnico de Data Architecture/Data Engineering do iFood.
+Este repositório contém a solução desenvolvida para o case técnico de Data Engineering do iFood.
 
 O objetivo do projeto é construir uma solução de dados para ingestão, armazenamento, transformação, disponibilização e análise dos dados públicos de corridas de Yellow Taxi da NYC TLC, considerando inicialmente o período de janeiro a maio de 2023.
 
