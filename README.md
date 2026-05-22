@@ -108,7 +108,7 @@ Tabela criada:
 
 workspace.ifood_case.raw_yellow_taxi_trips
 
-Responsabilidades:
+**Responsabilidades:**
 
 01. ler os arquivos da Landing Zone;
 02. realizar leitura mês a mês para evitar conflito de schema;
@@ -125,7 +125,7 @@ Tabela criada:
 
 workspace.ifood_case.silver_yellow_taxi_trips
 
-Responsabilidades:
+**Responsabilidades:**
 
 01. ler a tabela Raw;
 02. garantir presença das colunas obrigatórias;
@@ -134,7 +134,7 @@ Responsabilidades:
 05. criar colunas auxiliares de data e hora;
 06. persistir os dados tratados como tabela Delta.
 
-Regras de qualidade aplicadas:
+**Regras de qualidade aplicadas:**
 
 01. VendorID não nulo;
 02. passenger_count não nulo e maior que zero;
@@ -144,7 +144,7 @@ Regras de qualidade aplicadas:
 06. tpep_dropoff_datetime maior que tpep_pickup_datetime;
 07. tpep_pickup_datetime dentro do período de janeiro a maio de 2023.
 
-Colunas auxiliares criadas:
+**Colunas auxiliares criadas:**
 
 pickup_date
 pickup_year
@@ -309,45 +309,45 @@ Depois de clonar, conecte os notebooks a um compute Serverless ou cluster dispon
 
 ### 8.2 Executar Etapa 1 — Landing Ingestion
 
-01. Notebook:
+**01. Notebook:**
 
 notebooks/01_ingest_landing.ipynb
 
-02. Caminho da Landing:
+**02. Caminho da Landing:**
 
 dbfs:/Volumes/workspace/ifood_case/case_files/landing/nyc_tlc/yellow_taxi/
 
-03. Caminho do manifesto:
+**03. Caminho do manifesto:**
 
 dbfs:/Volumes/workspace/ifood_case/case_files/metadata/landing_ingestion_manifest
 
 ### 8.3 Executar Etapa 2 — Raw Layer
 
-01. Notebook:
+**01. Notebook:**
 
 notebooks/02_build_raw.ipynb
 
-02. Tabela criada:
+**02. Tabela criada:**
 
 workspace.ifood_case.raw_yellow_taxi_trips
 
 ### 8.4 Executar Etapa 3 — Silver Layer
 
-01. Notebook:
+**01. Notebook:**
 
 notebooks/03_build_silver.ipynb
 
-02. Tabela criada:
+**02. Tabela criada:**
 
 workspace.ifood_case.silver_yellow_taxi_trips
 
 ### 8.5 Executar Etapa 4 — Gold Layer
 
-01. Notebook:
+**01. Notebook:**
 
 notebooks/04_build_gold.ipynb
 
-02. Tabelas criadas:
+**02. Tabelas criadas:**
 
 workspace.ifood_case.gold_yellow_taxi_trips
 workspace.ifood_case.gold_avg_total_amount_by_month
@@ -385,7 +385,8 @@ Status esperado: **success**
 ---
 
 ## 10. Validações Realizadas
-###10.1 Landing
+
+### 10.1 Landing
 
 Validações:
 
