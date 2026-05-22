@@ -18,7 +18,7 @@ def read_raw_table(spark: SparkSession) -> DataFrame:
 
 def build_silver_dataframe(raw_df: DataFrame) -> DataFrame:
     """
-    Construe o DataFrame Silver.
+    Constroe o DataFrame Silver.
 
     A camada Silver aplica regras mínimas de qualidade de dados e cria, aqui vamos deixar apenas a ultima versão do dado com colunas auxiliares analíticas para consumo posterior em SQL/PySpark.
     """
