@@ -35,9 +35,7 @@ LANDING_LOCAL_BASE_PATH = (
 
 def ensure_unity_catalog_volume(spark) -> None:
     """
-    Create the Unity Catalog schema and volume used by this case.
-
-    This function should be executed before writing files to the landing zone.
+    Cria o Unity Catalog e o volume para armanezamos a landing
     """
     spark.sql(f"CREATE SCHEMA IF NOT EXISTS {CATALOG_NAME}.{SCHEMA_NAME}")
 
@@ -49,9 +47,9 @@ def ensure_unity_catalog_volume(spark) -> None:
 
 def build_tlc_url(year: int, month: int) -> str:
     """
-    Build the official NYC TLC Parquet file URL for Yellow Taxi trip data.
+    Cria o arquivo em .parquet para a URL NYC TLC for Yellow Taxi trip data.
 
-    Example:
+    Exemplo:
     https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
     """
     return f"{BASE_URL}/yellow_tripdata_{year}-{month:02d}.parquet"
@@ -59,7 +57,7 @@ def build_tlc_url(year: int, month: int) -> str:
 
 def build_landing_path(year: int, month: int) -> str:
     """
-    Build the DBFS landing path used by Spark and dbutils.
+    Cria o caminho para o DBFS usando Spark e dbutils.
     """
     file_name = f"yellow_tripdata_{year}-{month:02d}.parquet"
 
@@ -73,7 +71,7 @@ def build_landing_path(year: int, month: int) -> str:
 
 def build_landing_local_path(year: int, month: int) -> str:
     """
-    Build the local /Volumes landing path used by Python file writes.
+    Cria a arquitetura de pastas na landing separando por ano/mês com Python.
     """
     file_name = f"yellow_tripdata_{year}-{month:02d}.parquet"
 
@@ -87,7 +85,7 @@ def build_landing_local_path(year: int, month: int) -> str:
 
 def dbfs_path_exists(dbutils, path: str) -> bool:
     """
-    Check whether a DBFS or Unity Catalog Volume path exists.
+    Verificação de volume, vê se ele está criado.
     """
     try:
         dbutils.fs.ls(path)
@@ -98,12 +96,9 @@ def dbfs_path_exists(dbutils, path: str) -> bool:
 
 def download_to_volume(source_url: str, target_local_path: str) -> int:
     """
-    Download a public file directly to a Unity Catalog Volume path.
+    Faz download do endpoint publico e extrai os .parquets
 
-    This avoids using /tmp and avoids dbutils.fs.cp from local filesystem,
-    which can be blocked in Databricks Serverless / Unity Catalog environments.
-
-    Returns the downloaded file size in bytes.
+    Evita o uso de /tmp e o dbutils.fs.cp do sistema de arquivos local, para não pararmos em bloqueio do ambiente Databricks Serverless / Unity Catalog.
     """
     os.makedirs(os.path.dirname(target_local_path), exist_ok=True)
 
@@ -138,9 +133,7 @@ def ingest_file_to_landing(
     overwrite: bool = False,
 ) -> Dict:
     """
-    Download one monthly NYC TLC Yellow Taxi file and store it in the landing zone.
-
-    The landing zone stores the original Parquet files without transformation.
+    Baixe o arquivo mensal do NYC TLC Yellow Taxi e armazena na landing.
     """
     source_url = build_tlc_url(year, month)
     landing_dbfs_path = build_landing_path(year, month)
@@ -200,9 +193,7 @@ def ingest_landing(
     months: Optional[List[int]] = None,
     overwrite: bool = False,
 ) -> List[Dict]:
-    """
-    Ingest selected NYC TLC Yellow Taxi monthly files into the landing zone.
-    """
+    
     if months is None:
         months = DEFAULT_MONTHS
 
