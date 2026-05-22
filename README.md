@@ -41,7 +41,7 @@ https://d37ci6vzurychx.cloudfront.net/trip-data/
 ## 3. Arquitetura proposta
 
 A solução foi desenhada com separação entre camadas de dados:
-
+```text
 NYC TLC public files
         |
         v
@@ -55,7 +55,7 @@ Silver
         |
         v
 Gold / SQL analysis
-
+```
 ### 3.1 Landing Zone
 
 A Landing Zone armazena os arquivos originais da fonte sem aplicação de regras de negócio, limpeza ou transformação.
@@ -73,7 +73,7 @@ Caminho utilizado no Databricks:
 dbfs:/Volumes/workspace/ifood_case/case_files/landing/nyc_tlc/yellow_taxi/
 
 Estrutura esperada:
-
+```text
 landing/
 └── nyc_tlc/
     └── yellow_taxi/
@@ -88,7 +88,7 @@ landing/
             │   └── yellow_tripdata_2023-04.parquet
             └── month=05/
                 └── yellow_tripdata_2023-05.parquet
-
+```
 ---
 
 ## 4. Stack utilizada
@@ -99,6 +99,7 @@ Unity Catalog Volumes
 GitHub
 ---
 ## 5. Estrutura atual do repositório
+```text
 ifood-case/
 ├── landing/
 │   └── .gitkeep
@@ -112,6 +113,7 @@ ifood-case/
 ├── .gitignore
 ├── README.md
 └── requirements.txt
+```
 
 ### 5.1 src/ingest_landing.py
 
@@ -204,13 +206,13 @@ Conecte o notebook a um compute Serverless ou cluster disponível.
 8.3 Executar as células do notebook
 
 Cada diretório mensal deve conter um arquivo Parquet:
-
+```text
 month=01/yellow_tripdata_2023-01.parquet
 month=02/yellow_tripdata_2023-02.parquet
 month=03/yellow_tripdata_2023-03.parquet
 month=04/yellow_tripdata_2023-04.parquet
 month=05/yellow_tripdata_2023-05.parquet
-
+```
 A leitura dos arquivos foi validada de forma controlada, mês a mês, com seleção e cast das colunas obrigatórias:
 
 VendorID
